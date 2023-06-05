@@ -1,0 +1,134 @@
+//SQL Queries For Creating Tables Movies, Artist & Review and Insert, Update, Alter and Select
+
+
+
+//1. Table Creation: “Movies”
+CREATE TABLE Movies(
+  Id Primary Key, 
+  Name Text,
+  Image Text,
+  Artist_Id Int,
+  Review_Id Int
+  );
+
+//1.a. Inserting Data Into “Movies”Table
+INSERT INTO Movies
+ VALUES (1, "Minnal Murali", "https://resizing.flixster.com/9DXfheQGvFlQV4K-PJOSAgnJ6cc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzExYmRjOGJhLWUxNmYtNGVmNS04MTUyLTVhZDFjMTczZGUyZC5qcGc=", 2, 3);
+
+//1.b. Inserting Data Into “Movies”Table
+INSERT INTO Movies
+VALUES (3, "Ponniyin Selvan", "https://assets-in.bmscdn.com/discovery-catalog/events/et00348725-hgwdhndqxd-landscape.jpg", 1, 1);
+
+//1.c. Inserting Data Into “Movies” Table
+INSERT INTO Movies
+VALUES (2, "Virupaksha", "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/virupaksha-et00346626-1681729599.jpg", 3, 2);
+
+//1.d. Updating Data Into “Movies”Table
+UPDATE Movies
+SET Image = "https://cdn.movietalkies.com/wp-content/uploads/2023/03/virupaksha-pos.jpeg"
+WHERE Name = "Virupaksha";
+
+//1.e. Altering Data Into “Movies”Table
+ALTER TABLE MOVIES
+ADD Video Text 
+    DEFAULT "Trailer";
+
+//1.f. Updating Data Into “Movies”Table
+UPDATE Movies
+SET Video = "https://www.youtube.com/watch?v=OJHlagfrL0c"
+WHERE Id = 1;
+
+UPDATE Movies
+SET Video = "https://www.youtube.com/watch?v=D4qAQYlgZQs"
+WHERE Name = "Ponniyin Selvan";
+
+UPDATE Movies
+SET Video = "https://www.youtube.com/watch?v=CX7hjYjLE5w"
+WHERE Artist_Id = 3;
+
+//1.g. Altering Data Into “Movies”Table
+ALTER TABLE MOVIES
+ADD Genre Text 
+    DEFAULT "Genre";
+
+//1.h. Updating Data Into “Movies”Table
+UPDATE Movies
+SET Genre = "Action"
+WHERE Id = 1;
+
+UPDATE Movies
+SET Genre = "Horror"
+WHERE ID = 2;
+
+UPDATE Movies
+SET Genre = "Historical Fiction"
+WHERE ID = 3;
+
+//1.i. Inserting Data Into “Movies” Table
+INSERT INTO Movies
+VALUES (4, "Ponniyin Selvan", "https://assets-in.bmscdn.com/discovery-catalog/events/et00348725-hgwdhndqxd-landscape.jpg", 1, 1, "https://www.youtube.com/watch?v=D4qAQYlgZQs", "Thriller"),
+       (5, "Virupaksha", "https://assets-			in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/virupaksha-et00346626-1681729599.jpg", 3, 2, "https://www.youtube.com/watch?v=CX7hjYjLE5w", "Mystery"),
+       (6, "Minnal Murali", "https://resizing.flixster.com/9DXfheQGvFlQV4K-PJOSAgnJ6cc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzExYmRjOGJhLWUxNmYtNGVmNS04MTUyLTVhZDFjMTczZGUyZC5qcGc=", 2, 3, "https://www.youtube.com/watch?v=OJHlagfrL0c", "Adventure");
+
+//====================================================================================================================================================================================================================================================
+
+//2. Table Creation: “Artist”
+CREATE TABLE Artist(
+  Name Text,
+  Movie_Id Int,
+  Artist_Id Int
+  );
+
+//2.a. Inserting Data Into “Artist” Table
+INSERT INTO Artist
+VALUES ("Vikram", 3, 1),
+	   ("Tovino Thomas", 1, 2),
+	   ("Sai Dharam Tej", 2, 3);
+
+//2.b. Altering Data Into “Artist”Table
+ALTER TABLE Artist
+ADD Skills Text;
+
+//2.c. Updating Data Into “Artist”Table
+UPDATE Artist
+SET Skills = "Prolific method actor"
+WHERE Artist_Id = 1;
+
+UPDATE Artist
+SET Skills = "Kalaripayattu"
+WHERE Name = "Tovino Thomas";
+
+UPDATE Artist
+SET Skills = "Nice dancing skills"  
+WHERE Name = "Sai Dharam Tej";
+
+//2.d. Inserting Data Into “Artist”Table
+INSERT INTO Artist
+VALUES ("Vikram", 3, 1, "Unmatched acting skills to leaving us in awe of his transformative roles"),
+       ("Tovino Thomas", 1, 2, "Horse riding");
+
+//====================================================================================================================================================================================================================================================
+
+//3. Table Creation: “Review”
+CREATE TABLE Review(
+  ID Primary Key,
+  Name Text,
+  Review Text,
+  Movie_Id Int
+  );
+
+//3.a. Inserting Data Into “Review” Table
+INSERT INTO Review
+VALUES(1, "Times Of India", "Mani Ratnam's adaptation of Kalki's Ponniyin Selvan is spectacular", 3),
+      (2, "Rotten Tomatoes", "This is an epic superhero movie that deftly mixes the familiars of the form with true originality.", 1),
+      (3, "The Hindhu", " Mani Ratnam dishes out a satisfying sequel", 3),
+      (4, "Great Andhra", "Horror Set In New Ambiance", 2);
+
+//====================================================================================================================================================================================================================================================
+
+// SELECT Queries 
+SELECT * From Movies LEFT JOIN Review ON Movies.Id = Review.Movie_Id;
+
+SELECT * From Movies INNER JOIN Artist ON Movies.Artist_Id = Artist.Artist_Id;
+SELECT * From Review JOIN Artist ON Review.Movie_Id = Artist.Movie_Id;  
+  
